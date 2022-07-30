@@ -1,14 +1,15 @@
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useRef, useState} from 'react'
+import { useRef} from 'react'
+import { Canvas, useFrame, useThree} from '@react-three/fiber'
 
 function Box() {
   const ref = useRef()
+  const { viewport } = useThree()
   
   useFrame((state) => {
-    // ref.current.position.x = Math.sin(state.clock.elapsedTime) * 2
-    // ref.current.rotation.y = Math.sin(state.clock.elapsedTime * 2)
-    // ref.current.rotation.y += 0.01
-    ref.current.position.z = THREE.MathUtils.lerp(ref.current.position.z, clicked ? 1 : 0, 0.1)
+    ref.current.position.y += 0.01
+    if(ref.current.position.y > viewport.height / 1.5 ) {
+      ref.current.position.y = -viewport.height / 1.5 
+    }
   })
 
   return (
@@ -22,6 +23,8 @@ function Box() {
 function App() {
   return (
   <Canvas>
+    <Box />
+    <Box />
     <Box />
   </Canvas>
   )
