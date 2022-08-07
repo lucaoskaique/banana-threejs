@@ -6,16 +6,26 @@ import { Environment, useGLTF } from "@react-three/drei";
 function Horseshoe({ z }) {
   const ref = useRef();
   const { nodes, materials } = useGLTF("/ferradura-v1-v2-transformed.glb");
+
   const { viewport, camera } = useThree();
+
   const { width, height } = viewport.getCurrentViewport(camera, [0, 0, z]);
 
   const [data] = useState({
     x: THREE.MathUtils.randFloatSpread(2),
     y: THREE.MathUtils.randFloatSpread(height),
+    rX: Math.random() * Math.PI,
+    rY: Math.random() * Math.PI,
+    rZ: Math.random() * Math.PI,
   });
 
   useFrame((state) => {
-    ref.current.position.set(data.x * width, (data.y += 0.5), z);
+    ref.current.rotation.set(
+      (data.rX += 0.001),
+      (data.rY += 0.004),
+      (data.rZ += 0.0005)
+    );
+    ref.current.position.set(data.x * width, (data.y += 0.01), z);
     if (data.y > height / 1.5) {
       data.y = -height / 1.5;
     }
@@ -28,7 +38,7 @@ function Horseshoe({ z }) {
     // </mesh>
     <mesh
       ref={ref}
-      scale={0.05}
+      scale={0.09}
       geometry={nodes.Horse_Shoe_lambert2_0.geometry}
       material={materials.lambert2}
       material-color="pink"
