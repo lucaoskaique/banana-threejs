@@ -24,9 +24,9 @@ function Horseshoe({ z }) {
   useFrame((state) => {
     if (!ref.current) return;
     ref.current.rotation.set(
-      (data.rX += 0.001),
-      (data.rY += 0.001),
-      (data.rZ += 0.001)
+      (data.rX += clicked ? 0.1 : 0.001),
+      (data.rY += clicked ? 0.1 : 0.001),
+      (data.rZ += clicked ? 0.1 : 0.001)
     );
     if (clicked) data.z -= 1;
     if (data.z < -200) {
