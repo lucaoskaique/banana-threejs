@@ -4,6 +4,47 @@ import * as THREE from "three";
 import { Environment, useGLTF } from "@react-three/drei";
 import { EffectComposer, DepthOfField } from "@react-three/postprocessing";
 
+function Overlay() {
+  return (
+    <Container>
+      <TopLeft>
+        <h1>
+          LANDING
+          <br />
+          PAGES —
+        </h1>
+        <p>In React & Threejs —</p>
+      </TopLeft>
+      <BottomLeft>
+        A runtime deconstruction of <a href="https://playful.software">playful.software</a>
+      </BottomLeft>
+      <BottomRight>
+        Inspiration and ideas
+        <br />
+        Fundamentals
+        <br />
+        Finding models
+        <br />
+        Preparing them for the web
+        <br />
+        Displaying and changing models
+        <br />
+        Animation fundamentals
+        <br />
+        Effects and making things look good
+        <br />
+        Performance and time to load
+        <br />
+      </BottomRight>
+      <Hamburger>
+        <div />
+        <div />
+        <div />
+      </Hamburger>
+      <VelvetBanana />
+    </Container>
+  );
+}
 function Horseshoe({ z }) {
   const ref = useRef();
   const [clicked, setClicked] = useState(false);
@@ -82,7 +123,7 @@ function App({ count = 200, depth = 80 }) {
   return (
     <>
       <Canvas gl={{ alpha: false }} camera={{ near: 0.01, far: 110, fov: 30 }}>
-        <color attach="background" args={["#f0e006"]} />
+        <color attach="background" args={["#F103E5"]} />
         {/* <ambientLight intensity={1.2} /> */}
         <spotLight position={[10, 10, 10]} intensity={1} />
         <Suspense fallback={null}>
