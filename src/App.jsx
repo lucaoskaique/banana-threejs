@@ -1,4 +1,4 @@
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { Environment, useGLTF } from "@react-three/drei";
@@ -16,7 +16,8 @@ function Overlay() {
         <p>In React & Threejs —</p>
       </TopLeft>
       <BottomLeft>
-        A runtime deconstruction of <a href="https://playful.software">playful.software</a>
+        A runtime deconstruction of{" "}
+        <a href="https://playful.software">playful.software</a>
       </BottomLeft>
       <BottomRight>
         Inspiration and ideas
@@ -119,7 +120,20 @@ function Horseshoe({ z }) {
 //   );
 // }
 
-function App({ count = 200, depth = 80 }) {
+function App({ count = 50, depth = 80 }) {
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    function handleWindowSizeChange() {
+      const isMobile = width <= 768;
+      count = isMobile ? 50 : 100;
+    }
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
   return (
     <>
       <Canvas gl={{ alpha: false }} camera={{ near: 0.01, far: 110, fov: 30 }}>
